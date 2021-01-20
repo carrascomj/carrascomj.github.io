@@ -141,8 +141,9 @@
                                 <p>Can your repository secrets be logged with Github Actions? A guide on trying
 not to get sued and/or fired!</p>
 <span id="continue-reading"></span>
-<p>While migrating travis.CI to github actions, I wanted to test when/if the 
-<a href="https://docs.github.com/en/actions/reference/encrypted-secrets">secrets on a repository</a>.</p>
+<p>While migrating travis CI to github actions, I wanted to test whether/when the 
+<a href="https://docs.github.com/en/actions/reference/encrypted-secrets">secrets on a repository</a>
+get logged.</p>
 <h1 id="set-some-secrets"><a class="zola-anchor" href="#set-some-secrets"
    aria-label="Anchor link for: set-some-secrets" style="opacity:0.2">
     
@@ -187,21 +188,21 @@ Run echo *** | grep &quot;SEENO&quot;
   shell: /bin/bash -e {0}
 ***
 </span></code></pre>
-<p>Fantastic, exactly how it should be!</p>
+<p>Fantastic, exactly how it should be.</p>
 <h1 id="strange-usage-echoing-the-secrets"><a class="zola-anchor" href="#strange-usage-echoing-the-secrets"
    aria-label="Anchor link for: strange-usage-echoing-the-secrets" style="opacity:0.2">
     
     §
     
 </a>Strange usage: echoing the secrets</h1>
-<p>Let's add another step, echoing the secret to stdout. </p>
+<p>Let's add another step, echoing the secret to <code>STDOUT</code>. </p>
 <pre style="background-color:#212121;">
 <code class="language-yaml" data-lang="yaml"><span style="color:#89ddff;">- </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">Echoed secrets are not logged!
       run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">echo ${{ secrets.ECHOED_TOKEN }}
 </span></code></pre>
 <p>Log:</p>
 <pre style="background-color:#212121;">
-<code class="language-text" data-lang="text"><span style="color:#eeffff;">&gt; Echoed secrets should are not logged!
+<code class="language-text" data-lang="text"><span style="color:#eeffff;">&gt; Echoed secrets are not logged!
 
 Run echo ***
   echo ***
@@ -210,7 +211,7 @@ Run echo ***
 </span></code></pre>
 <p>In this case, github actions saves us from doomsday but we are really flexing
 our madness here. Nonetheless, if you really want the secret to be printed (maybe
-for debugging) you cant use <a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-Actions-Secrets-Example-Token-Tutorial">the workaround posted here</a></p>
+for debugging) you may use <a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-Actions-Secrets-Example-Token-Tutorial">the workaround posted here</a></p>
 <pre style="background-color:#212121;">
 <code class="language-yaml" data-lang="yaml"><span style="color:#89ddff;">- </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">This is going to be printed!
   run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">echo ${{secrets.SECRET_TOKEN}} | sed &#39;s/./&amp; /g&#39; 
@@ -244,7 +245,7 @@ Error: Process completed with exit code 1.
     
 </a>Bad usage: the command fails because of wrong syntax</h1>
 <p>This is when you get fired. If a command is called using the wrong syntax (or 
-your secret shoudl refer to a file like in this case) the error trace of the
+your secret refers to what should be a file but it isn't, like in this case) the error trace of the
 command might reveal the secrets, letting them exposed to the whole Internet.</p>
 <pre style="background-color:#212121;">
 <code class="language-yaml" data-lang="yaml"><span style="color:#f07178;">tests-bad-syntax</span><span style="color:#89ddff;">:

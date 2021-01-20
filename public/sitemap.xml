@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>/home/georg/GIT/meio/public/</loc>
+    </url>
+    <url>
+        <loc>/home/georg/GIT/meio/public/article/</loc>
+    </url>
+    <url>
+        <loc>/home/georg/GIT/meio/public/article/getting-fired-1/</loc>
+        <lastmod>2021-01-20</lastmod>
+    </url>
+    <url>
+        <loc>/home/georg/GIT/meio/public/draft/</loc>
+    </url>
+    <url>
+        <loc>/home/georg/GIT/meio/public/tags/</loc>
+    </url>
+    <url>
+        <loc>/home/georg/GIT/meio/public/tags/devops/</loc>
+    </url>
+    <url>
+        <loc>/home/georg/GIT/meio/public/tags/github/</loc>
+    </url>
+</urlset>

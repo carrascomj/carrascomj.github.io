@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: /home/georg/GIT/meio/public/sitemap.xml

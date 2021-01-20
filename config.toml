@@ -1,0 +1,20 @@
+base_url = "/home/georg/GIT/meio/public/"
+title = "Jorge's blog"
+
+highlight_code = true
+highlight_theme = "material-dark"
+compile_sass = true
+
+theme = "Zulma"
+
+taxonomies = [
+    {name = "tags"},
+]
+
+[extra]
+zulma_theme = "slate"
+zulma_brand = {text = "Home"}
+zulma_menu = [
+    {url = "$BASE_URL/article", name = "Articles"},
+    {url = "$BASE_URL/tags", name = "Tags"},
+]

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    <!-- Enable responsiveness on mobile devices-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <title>
+        Jorge&#x27;s blog
+    </title>
+
+    
+
+<link id="slate" class="stylesheet" rel="stylesheet"
+    href="&#x2F;home&#x2F;georg&#x2F;GIT&#x2F;meio&#x2F;public&#x2F;slate.css" />
+
+
+    <!-- This script must follow css -->
+    
+
+    
+
+    
+
+    <script defer src="&#x2F;home&#x2F;georg&#x2F;GIT&#x2F;meio&#x2F;public&#x2F;js&#x2F;katex.min.js"></script>
+    <script defer src="&#x2F;home&#x2F;georg&#x2F;GIT&#x2F;meio&#x2F;public&#x2F;js&#x2F;mathtex-script-type.min.js"></script>
+    <script defer src="&#x2F;home&#x2F;georg&#x2F;GIT&#x2F;meio&#x2F;public&#x2F;js&#x2F;auto-render.min.js"></script>
+    <link rel="stylesheet" href="&#x2F;home&#x2F;georg&#x2F;GIT&#x2F;meio&#x2F;public&#x2F;css&#x2F;katex.min.css">
+
+    
+    
+
+    <noscript>
+        <style>
+            .navbar-menu {
+                display: block;
+            }
+
+            .js-only {
+                display: none;
+            }
+        </style>
+    </noscript>
+    
+</head>
+
+<body>
+
+
+<!-- START NAV -->
+
+
+
+
+<header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                
+                <a class="navbar-item" href="/">
+                    
+                    <span>Home</span>
+                    
+                </a>
+                
+                <span class="navbar-burger burger" data-target="navbarMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    
+                    
+                    
+                    
+                    <a itemprop="url"
+                        class="navbar-item "
+                        href="&#x2F;home&#x2F;georg&#x2F;GIT&#x2F;meio&#x2F;public&#x2F;&#x2F;article">
+                        <span itemprop="name">Articles
+                        </span>
+                    </a>
+                    
+                    
+                    
+                    <a itemprop="url"
+                        class="navbar-item "
+                        href="&#x2F;home&#x2F;georg&#x2F;GIT&#x2F;meio&#x2F;public&#x2F;&#x2F;tags">
+                        <span itemprop="name">Tags
+                        </span>
+                    </a>
+                    
+                    
+
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+
+
+
+<!-- END NAV -->
+<main>
+    <section class="container">
+        <div class="columns is-desktop">
+            <div class="column is-10-desktop is-offset-1-desktop">
+                <article itemscope itemtype="http://schema.org/BlogPosting">
+                    <div class="card article">
+                        <div class="card-content">
+                            
+<header>
+    <div class="has-text-centered">
+        <a href="/home/georg/GIT/meio/public/article/getting-fired-1/">
+            <p class="title article-title">Getting fired with Github Actions!
+            </p>
+        </a>
+        <div class="tags has-addons level-item">
+            <span class="tag is-rounded">2021-01-20</span>
+                       
+            <span class="tag is-rounded">
+<svg class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round"
+    stroke-linejoin="round" stroke-width="6.25%">
+    <circle cx="16" cy="16" r="14" />
+    <path d="M16 8 L16 16 20 20" />
+</svg>
+<span>&nbsp;3 minute read</span>
+</span>
+        </div>
+    </div>
+</header>
+
+                            <div itemprop="articleBody" class="content article-body">
+                                <p>Can your repository secrets be logged with Github Actions? A guide on trying
+not to get sued and/or fired!</p>
+<span id="continue-reading"></span>
+<p>While migrating travis.CI to github actions, I wanted to test when/if the 
+<a href="https://docs.github.com/en/actions/reference/encrypted-secrets">secrets on a repository</a>.</p>
+<h1 id="set-some-secrets"><a class="zola-anchor" href="#set-some-secrets"
+   aria-label="Anchor link for: set-some-secrets" style="opacity:0.2">
+    
+    §
+    
+</a>Set some secrets</h1>
+<p>I created an empty repository and set up some secrets (<em>Settings &gt; Secrets &gt;
+New repository secret</em>):</p>
+<ul>
+<li>NEVER_SEE_TOKEN, with value &quot;SEENO EVIL&quot;.</li>
+<li>ECHOED_TOKEN, with value &quot;echoed&quot;:</li>
+</ul>
+<h1 id="good-usage-the-command-success"><a class="zola-anchor" href="#good-usage-the-command-success"
+   aria-label="Anchor link for: good-usage-the-command-success" style="opacity:0.2">
+    
+    §
+    
+</a>Good usage: the command success</h1>
+<p>My very first attempt was running a command using the secret properly. Here, it is
+expected that github will hide the secret variables.</p>
+<pre style="background-color:#212121;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">secret
+
+</span><span style="color:#f78c6c;">on</span><span style="color:#89ddff;">:
+  </span><span style="color:#f07178;">push</span><span style="color:#89ddff;">:
+    </span><span style="color:#f07178;">branches</span><span style="color:#89ddff;">:
+    - </span><span style="color:#f07178;">master
+
+jobs</span><span style="color:#89ddff;">:
+  </span><span style="color:#f07178;">test</span><span style="color:#89ddff;">:
+    </span><span style="color:#f07178;">runs-on</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">ubuntu-latest
+    steps</span><span style="color:#89ddff;">:
+    - </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">Check successful action with secret is not logged and works
+      run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">echo ${{ secrets.NEVER_SEE_TOKEN }} | grep &quot;SEENO&quot;
+</span></code></pre>
+<p>Let's check the log!</p>
+<pre style="background-color:#212121;">
+<code class="language-text" data-lang="text"><span style="color:#eeffff;">&gt; Check successful action with secret is not logged and works
+
+Run echo *** | grep &quot;SEENO&quot;
+  echo *** | grep &quot;SEENO&quot;
+  shell: /bin/bash -e {0}
+***
+</span></code></pre>
+<p>Fantastic, exactly how it should be!</p>
+<h1 id="strange-usage-echoing-the-secrets"><a class="zola-anchor" href="#strange-usage-echoing-the-secrets"
+   aria-label="Anchor link for: strange-usage-echoing-the-secrets" style="opacity:0.2">
+    
+    §
+    
+</a>Strange usage: echoing the secrets</h1>
+<p>Let's add another step, echoing the secret to stdout. </p>
+<pre style="background-color:#212121;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#89ddff;">- </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">Echoed secrets are not logged!
+      run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">echo ${{ secrets.ECHOED_TOKEN }}
+</span></code></pre>
+<p>Log:</p>
+<pre style="background-color:#212121;">
+<code class="language-text" data-lang="text"><span style="color:#eeffff;">&gt; Echoed secrets should are not logged!
+
+Run echo ***
+  echo ***
+  shell: /bin/bash -e {0}
+***
+</span></code></pre>
+<p>In this case, github actions saves us from doomsday but we are really flexing
+our madness here. Nonetheless, if you really want the secret to be printed (maybe
+for debugging) you cant use <a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-Actions-Secrets-Example-Token-Tutorial">the workaround posted here</a></p>
+<pre style="background-color:#212121;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#89ddff;">- </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">This is going to be printed!
+  run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">echo ${{secrets.SECRET_TOKEN}} | sed &#39;s/./&amp; /g&#39; 
+</span></code></pre><h1 id="still-good-usage-the-command-fails-but-syntax-is-fine"><a class="zola-anchor" href="#still-good-usage-the-command-fails-but-syntax-is-fine"
+   aria-label="Anchor link for: still-good-usage-the-command-fails-but-syntax-is-fine" style="opacity:0.2">
+    
+    §
+    
+</a>Still good usage: the command fails but syntax is fine</h1>
+<p>If one job failed, the secrets should not be printed, right?</p>
+<pre style="background-color:#212121;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#f07178;">test-bad</span><span style="color:#89ddff;">:
+    </span><span style="color:#f07178;">runs-on</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">ubuntu-latest
+    steps</span><span style="color:#89ddff;">:
+    - </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">Check unsuccessful action with secret is not logged and works
+      run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">echo ${{ secrets.NEVER_SEE_TOKEN }} | grep &quot;GOOD&quot;
+</span></code></pre>
+<p>Log:</p>
+<pre style="background-color:#212121;">
+<code><span style="color:#eeffff;">&gt; Check unsuccessful action with secret is not logged and works
+Run echo *** | grep &quot;GOOD&quot;
+  echo *** | grep &quot;GOOD&quot;
+  shell: /bin/bash -e {0}
+Error: Process completed with exit code 1.
+</span></code></pre>
+<p>Right!</p>
+<h1 id="bad-usage-the-command-fails-because-of-wrong-syntax"><a class="zola-anchor" href="#bad-usage-the-command-fails-because-of-wrong-syntax"
+   aria-label="Anchor link for: bad-usage-the-command-fails-because-of-wrong-syntax" style="opacity:0.2">
+    
+    §
+    
+</a>Bad usage: the command fails because of wrong syntax</h1>
+<p>This is when you get fired. If a command is called using the wrong syntax (or 
+your secret shoudl refer to a file like in this case) the error trace of the
+command might reveal the secrets, letting them exposed to the whole Internet.</p>
+<pre style="background-color:#212121;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#f07178;">tests-bad-syntax</span><span style="color:#89ddff;">:
+    </span><span style="color:#f07178;">runs-on</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">ubuntu-latest
+    steps</span><span style="color:#89ddff;">:
+    - </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">Check unsuccessful action with secret is logged and fails
+      run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">grep &quot;JULY&quot; ${{ secrets.NEVER_SEE_TOKEN }}
+</span></code></pre>
+<p>Log:</p>
+<pre style="background-color:#212121;">
+<code><span style="color:#eeffff;">&gt; Check unsuccessful action with secret is logged and fails
+Run grep &quot;JULY&quot; ***
+  grep &quot;JULY&quot; ***
+  shell: /bin/bash -e {0}
+grep: SEENO: No such file or directory
+grep: EVIL: No such file or directory
+</span></code></pre><h2 id="how-to-fix-this-situation"><a class="zola-anchor" href="#how-to-fix-this-situation"
+   aria-label="Anchor link for: how-to-fix-this-situation" style="opacity:0.2">
+    
+    §§
+    
+</a>How to fix this situation</h2>
+<p>At least the first time using an action of this kind, we could redirect the
+<code>STERR</code> to <code>/dev/null</code>. Thus, the possible stack of errors will be removed
+from the logs.</p>
+<pre style="background-color:#212121;">
+<code class="language-yaml" data-lang="yaml"><span style="color:#eeffff;">  </span><span style="color:#f07178;">tests-bad-syntax-recovered</span><span style="color:#89ddff;">:
+    </span><span style="color:#f07178;">runs-on</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">ubuntu-latest
+    steps</span><span style="color:#89ddff;">:
+    - </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">Check unsuccessful action with wrong syntax and secret is not logged
+      run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">grep &quot;JULY&quot; ${{ secrets.NEVER_SEE_TOKEN }} 2&gt; /dev/null
+</span></code></pre>
+<p>Log:</p>
+<pre style="background-color:#212121;">
+<code><span style="color:#eeffff;">&gt; Check unsuccessful action with wrong syntax and secret is not logged
+Run grep &quot;JULY&quot; *** 2&gt; /dev/null
+  grep &quot;JULY&quot; *** 2&gt; /dev/null
+  shell: /bin/bash -e {0}
+Error: Process completed with exit code 2.
+</span></code></pre>
+<p>Yay! Another way would be to <em>maybe</em> try the commands locally. Just maybe.</p>
+
+                            </div>
+                        </div>
+                        
+                        
+<footer class="card-footer">
+    <div class="article-footer">
+        <div class="columns is-multiline">
+            <div class="column is-12">
+                <p>
+                    Published
+                    
+
+<time datetime="2021-01-20">
+    2021-01-20
+</time>
+
+
+                    
+
+
+                    
+
+
+                    
+
+and tagged
+
+<a href="/home/georg/GIT/meio/public/tags/devops/">
+    <span class="tag is-link">DevOps </span>
+</a>
+
+
+
+and
+
+
+
+
+<a href="/home/georg/GIT/meio/public/tags/github/">
+    <span class="tag is-link">Github </span>
+</a>
+
+
+
+
+
+
+                </p>
+            </div>
+            <div class="column">
+                <a class="button is-pulled-right is-info" href="/">Back Home</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+                        
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+
+<script type="text/javascript" src="&#x2F;home&#x2F;georg&#x2F;GIT&#x2F;meio&#x2F;public&#x2F;js&#x2F;zulma_navbar.js"></script>
+
+    
+
+
+</body>
+
+</html>

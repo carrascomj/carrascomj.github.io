@@ -22,7 +22,7 @@ New repository secret_):
 * NEVER_SEE_TOKEN, with value "SEENO EVIL".
 * ECHOED_TOKEN, with value "echoed":
 
-# Good usage: the command success
+# Good usage: the command succeed
 My very first attempt was running a command using the secret properly. Here, it is
 expected that github will hide the secret variables.
 
@@ -76,7 +76,7 @@ Run echo ***
 
 In this case, github actions saves us from doomsday but we are really flexing
 our madness here. Nonetheless, if you really want the secret to be printed (maybe
-for debugging) you may use [the workaround posted here](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-Actions-Secrets-Example-Token-Tutorial)
+for debugging) you may use [the workaround posted here](https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-Actions-Secrets-Example-Token-Tutorial):
 
 ```yaml
 - name: This is going to be printed!

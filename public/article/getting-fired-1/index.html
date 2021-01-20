@@ -156,12 +156,12 @@ New repository secret</em>):</p>
 <li>NEVER_SEE_TOKEN, with value &quot;SEENO EVIL&quot;.</li>
 <li>ECHOED_TOKEN, with value &quot;echoed&quot;:</li>
 </ul>
-<h1 id="good-usage-the-command-success"><a class="zola-anchor" href="#good-usage-the-command-success"
-   aria-label="Anchor link for: good-usage-the-command-success" style="opacity:0.2">
+<h1 id="good-usage-the-command-succeed"><a class="zola-anchor" href="#good-usage-the-command-succeed"
+   aria-label="Anchor link for: good-usage-the-command-succeed" style="opacity:0.2">
     
     §
     
-</a>Good usage: the command success</h1>
+</a>Good usage: the command succeed</h1>
 <p>My very first attempt was running a command using the secret properly. Here, it is
 expected that github will hide the secret variables.</p>
 <pre style="background-color:#212121;">
@@ -211,7 +211,7 @@ Run echo ***
 </span></code></pre>
 <p>In this case, github actions saves us from doomsday but we are really flexing
 our madness here. Nonetheless, if you really want the secret to be printed (maybe
-for debugging) you may use <a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-Actions-Secrets-Example-Token-Tutorial">the workaround posted here</a></p>
+for debugging) you may use <a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/GitHub-Actions-Secrets-Example-Token-Tutorial">the workaround posted here</a>:</p>
 <pre style="background-color:#212121;">
 <code class="language-yaml" data-lang="yaml"><span style="color:#89ddff;">- </span><span style="color:#f07178;">name</span><span style="color:#89ddff;">: </span><span style="color:#f07178;">This is going to be printed!
   run</span><span style="color:#89ddff;">: </span><span style="color:#c3e88d;">echo ${{secrets.SECRET_TOKEN}} | sed &#39;s/./&amp; /g&#39; 

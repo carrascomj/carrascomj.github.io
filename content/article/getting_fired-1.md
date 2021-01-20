@@ -22,7 +22,7 @@ New repository secret_):
 * NEVER_SEE_TOKEN, with value "SEENO EVIL".
 * ECHOED_TOKEN, with value "echoed":
 
-# Good usage: the command succeed
+# Good usage: the command succeeds
 My very first attempt was running a command using the secret properly. Here, it is
 expected that github will hide the secret variables.
 

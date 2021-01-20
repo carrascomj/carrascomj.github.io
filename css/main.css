@@ -587,6 +587,13 @@ p::selection,h6::selection,h5::selection,h4::selection,h3::selection,h2::selecti
 	color: #fafafa;
 }
 
+.blog { 
+  position: absolute;
+  top: 1.5%;
+  right: 1.5%;
+  font-size: 75%;
+}
+
 
 @media (prefers-color-scheme: dark) {
 	p::selection,h6::selection,h5::selection,h4::selection,h3::selection,h2::selection,h1::selection,img::selection,a::selection,span::selection,div::selection,b::selection,strike::selection {
@@ -638,3 +645,4 @@ p::selection,h6::selection,h5::selection,h4::selection,h3::selection,h2::selecti
 		color: #252021;
 	}
 }}
+

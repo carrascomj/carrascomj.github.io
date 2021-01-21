@@ -1,9 +1,9 @@
 base_url = "https://carrascomj.github.io/public/"
 title = "Jorge's blog"
 
-highlight_code = true
-highlight_theme = "material-dark"
 compile_sass = true
+# RSS Feed
+generate_feed = true
 
 theme = "Zulma"
 
@@ -11,10 +11,16 @@ taxonomies = [
     {name = "tags"},
 ]
 
+[markdown]
+highlight_code = true
+highlight_theme = "one-dark"
+
 [extra]
 zulma_theme = "slate"
 zulma_brand = {text = "Home"}
 zulma_menu = [
     {url = "$BASE_URL/article", name = "Articles"},
     {url = "$BASE_URL/tags", name = "Tags"},
+    {url = "$BASE_URL/atom.xml", name = "RSS"},
 ]
+
